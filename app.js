@@ -2,12 +2,32 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+import pkg from 'pg';
+const { Pool } = pkg;
 import dotenv from 'dotenv';
 dotenv.config();
 
-import pkg from 'pg';
-const { Pool } = pkg;
+// import dotenv from 'dotenv';
+// dotenv.config();
 
+// import pkg from 'pg';
+// const { Pool } = pkg;
+
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
+// local pg
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'baljaa',
+//   password: '0608',
+//   port: 5432,
+// });
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -15,15 +35,19 @@ const pool = new Pool({
   }
 });
 
+
+//
 const app = express();
 const port = 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+pool.connect()
+  .then(() => console.log('✅ Connected to PostgreSQL'))
+  .catch(err => console.error('❌ Connection error', err.stack));
 
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
-
 // Set up body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -35,6 +59,7 @@ app.set("views", path.join(__dirname, "views"));
 app.get('/', (req, res) => {
   res.render("index");
 });
+
 app.post('/submit', async (req, res) => {
   const { question, action } = req.body;
 
@@ -53,7 +78,6 @@ app.post('/submit', async (req, res) => {
     res.send('Unknown action.');
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
