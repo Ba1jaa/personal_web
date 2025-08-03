@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ba1jaa</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Include Sticky Navbar -->
+    <%- include("./partials/header.ejs") %>
+
+    <!-- Main Layout -->
+    <main class="main-layout">
+      <div class="profile-wrapper">
+        <img
+          src="/css/images/Kid_Might_Guy.webp"
+          alt="profile picture"
+          id="profile"
+        />
+        <p class="logo">Hey, I'm Baljaa!</p>
+      </div>
+      <p class="tagline">No pain, No gain</p>
+      <p class="role">
+        A Computer Science student with an interest in web development.
+      </p>
+      <p class="location">📍 Ulaanbaatar, Mongolia 🇲🇳</p>
+      <div class="ask">
+        <form action="/submit" method="post">
+          <label for="question">What else do you want to know about me?</label>
+          <input
+            type="text"
+            id="question"
+            name="question"
+            placeholder="Ask me anything"
+          />
+          <div class="button-group">
+            <input type="submit" name="action" value="Send" />
+            <input type="submit" name="action" value="Clear" />
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
