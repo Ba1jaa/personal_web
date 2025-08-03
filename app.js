@@ -38,8 +38,8 @@ const pool = new Pool({
 
 //
 const app = express();
-const port = 3000;
-
+//const port = 3000;
+const port = process.env.PORT || 3000;  // Use Render's port if available, otherwise default to 3000
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 pool.connect()
@@ -78,6 +78,7 @@ app.post('/submit', async (req, res) => {
     res.send('Unknown action.');
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
