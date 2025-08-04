@@ -50,7 +50,7 @@
 
  
   .nav-links {
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px; /* vertical spacing */
     justify-content: center;
     align-items: center;
